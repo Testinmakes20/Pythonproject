@@ -20,7 +20,7 @@ pipeline {
                 bat '''
                     call %VENV%\\Scripts\\activate.bat
                     pip install flake8
-                    flake8 .
+                    flake8 . --exclude=venv
                 '''
             }
         }
