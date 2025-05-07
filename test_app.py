@@ -10,10 +10,10 @@ def client():
     # Create tables before tests run
     with app.app_context():
         db.create_all()
-
+    
     with app.test_client() as client:
         yield client
-
+    
     # Optionally drop tables after tests
     with app.app_context():
         db.drop_all()
