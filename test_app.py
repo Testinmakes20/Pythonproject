@@ -5,7 +5,7 @@ from app import app, db
 @pytest.fixture
 def client():
     app.config["TESTING"] = True
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///:memory:"  # Use in-memory DB for testing
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///:memory:"
 
     # Create tables before tests run
     with app.app_context():
