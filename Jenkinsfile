@@ -9,6 +9,9 @@ pipeline {
         stage('Setup') {
             steps {
                 bat '''
+                    if exist venv (
+                       rmdir /s /q venv
+                    )
                     python -m venv %VENV%
                     call %VENV%\\Scripts\\activate.bat
                 '''
