@@ -29,6 +29,7 @@ pipeline {
             steps {
                 bat '''
                     call %VENV%\\Scripts\\activate.bat
+                    pip install -r requirements.txt
                     pytest
                 '''
             }
