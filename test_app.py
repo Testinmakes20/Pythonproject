@@ -22,3 +22,8 @@ def client():
 def test_home_status_code(client):
     response = client.get('/')
     assert response.status_code == 200
+
+def test_add_todo(client):
+    response = client.post('/add', data={'title': 'Test Todo'}, follow_redirects=True)
+    assert response.status_code == 200
+    assert b'Test Todo' in response.data
