@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
+
 # /// = relative path, //// = absolute path
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -52,7 +53,8 @@ def delete(todo_id):
 @app.route("/todos", methods=["GET"])
 def get_todos():
     todos = Todo.query.all()
-    return jsonify([{"id": todo.id, "title": todo.title, "complete": todo.complete} for todo in todos])
+    return jsonify([{"id": todo.id, "title": todo.title, "complete": todo.complete} 
+                    for todo in todos])
 
 
 @app.route("/todos", methods=["POST"])
