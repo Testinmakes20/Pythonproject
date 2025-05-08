@@ -1,8 +1,11 @@
 import json
 import pytest
-from app import app, db, Todo
+from app import app, db
+
 
 @pytest.fixture
+
+
 def client():
     app.config['TESTING'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # In-memory database for testing
