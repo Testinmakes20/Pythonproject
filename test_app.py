@@ -5,7 +5,6 @@ from app import app, db
 
 @pytest.fixture
 
-
 def client():
     app.config['TESTING'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # In-memory database for testing
@@ -15,6 +14,7 @@ def client():
         yield client
     with app.app_context():
         db.drop_all()  # Clean up the database after tests
+
 
 def test_create_todo(client):
     data = {"title": "Test Task", "description": "Test description"}
@@ -30,6 +30,7 @@ def test_get_todos(client):
     assert response.status_code == 200
     assert len(response.json) == 1  # We should have one todo
 
+
 def test_update_todo(client):
     # First, create a todo
     post_resp = client.post('/todos', json={"title": "Initial", "description": "Before"})
@@ -38,6 +39,7 @@ def test_update_todo(client):
     assert response.status_code == 200
     assert response.json["title"] == "Updated"
     assert response.json["complete"] is True
+
 
 def test_delete_todo(client):
     # First, create a todo
@@ -48,6 +50,7 @@ def test_delete_todo(client):
     # Verify the todo is deleted
     response = client.get('/todos')
     assert len(response.json) == 0
+
 
 def test_create_todo_invalid_payload(client):
     response = client.post('/todos', data=json.dumps({}), content_type='application/json')
