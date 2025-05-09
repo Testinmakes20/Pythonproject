@@ -53,8 +53,7 @@ def delete(todo_id):
 def get_todos():
     todos = Todo.query.all()
     return jsonify([{"id": todo.id, "title": todo.title,
-                     "complete": todo.complete}
-                    for todo in todos])
+                    "complete": todo.complete}for todo in todos])
 
 
 @app.route("/todos", methods=["POST"])
