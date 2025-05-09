@@ -53,7 +53,7 @@ def delete(todo_id):
 def get_todos():
     todos = Todo.query.all()
     return jsonify([{"id": todo.id, "title": todo.title,
-                     "complete": todo.complete} 
+                     "complete": todo.complete}
                     for todo in todos])
 
 
