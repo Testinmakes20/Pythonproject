@@ -4,7 +4,6 @@ from app import app, db
 
 
 @pytest.fixture
-
 def client():
     app.config['TESTING'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'  # In-memory database for testing
@@ -23,6 +22,7 @@ def test_create_todo(client):
     assert "id" in response.json
     assert response.json["title"] == "Test Task"
 
+
 def test_get_todos(client):
     # Prepopulate a todo
     client.post('/todos', json={"title": "Task 1", "description": "Sample"})
@@ -33,9 +33,11 @@ def test_get_todos(client):
 
 def test_update_todo(client):
     # First, create a todo
-    post_resp = client.post('/todos', json={"title": "Initial", "description": "Before"})
+    post_resp = client.post('/todos', 
+                        json={"title": "Initial", "description": "Before"})
     todo_id = post_resp.json["id"]
-    response = client.put(f'/todos/{todo_id}', json={"title": "Updated", "complete": True})
+    response = client.put(f'/todos/{todo_id}',
+                          json={"title": "Updated", "complete": True})
     assert response.status_code == 200
     assert response.json["title"] == "Updated"
     assert response.json["complete"] is True
@@ -43,7 +45,8 @@ def test_update_todo(client):
 
 def test_delete_todo(client):
     # First, create a todo
-    post_resp = client.post('/todos', json={"title": "To Delete", "description": "Temp"})
+    post_resp = client.post('/todos', 
+                         json={"title": "To Delete", "description": "Temp"})
     todo_id = post_resp.json["id"]
     response = client.delete(f'/todos/{todo_id}')
     assert response.status_code == 204
