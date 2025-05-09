@@ -7,7 +7,7 @@ from app import app, db
 def client():
     app.config['TESTING'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] =
-    'sqlite:///:memory:'  # In-memory database for testing
+        'sqlite:///:memory:'  # In-memory database for testing
     with app.app_context():
         db.create_all()  # Create all tables before each test
     with app.test_client() as client:
@@ -17,7 +17,8 @@ def client():
 
 
 def test_create_todo(client):
-    data = {"title": "Test Task", "description": "Test description"}
+    data = {"title": "Test Task",
+              "description": "Test description"}
     response = client.post('/todos', data=json.dumps(data),
                            content_type='application/json')
     assert response.status_code == 201
