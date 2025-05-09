@@ -52,7 +52,8 @@ def delete(todo_id):
 @app.route("/todos", methods=["GET"])
 def get_todos():
     todos = Todo.query.all()
-    return jsonify([{"id": todo.id, "title": todo.title, "complete": todo.complete} 
+    return jsonify([{"id": todo.id, "title": todo.title,
+                     "complete": todo.complete} 
                     for todo in todos])
 
 
@@ -65,7 +66,8 @@ def create_todo():
     new_todo = Todo(title=title, complete=False)
     db.session.add(new_todo)
     db.session.commit()
-    return jsonify({"id": new_todo.id, "title": new_todo.title, "complete": new_todo.complete}), 201
+    return jsonify({"id": new_todo.id, "title": new_todo.title,
+                    "complete": new_todo.complete}), 201
 
 
 @app.route("/todos/<int:todo_id>", methods=["PUT"])
@@ -80,7 +82,8 @@ def update_todo(todo_id):
     todo.title = title
     todo.complete = complete
     db.session.commit()
-    return jsonify({"id": todo.id, "title": todo.title, "complete": todo.complete})
+    return jsonify({"id": todo.id, "title": todo.title,
+                    "complete": todo.complete})
 
 
 @app.route("/todos/<int:todo_id>", methods=["DELETE"])
